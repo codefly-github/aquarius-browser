@@ -1,0 +1,45 @@
+diff --git a/chrome/browser/app_controller_mac.mm b/chrome/browser/app_controller_mac.mm
+index 5fa7c4a6f3f48b981370816c44c264a16a5ee834..70042a4427be8554d292a03d45144cd5ee6f96c8 100644
+--- a/chrome/browser/app_controller_mac.mm
++++ b/chrome/browser/app_controller_mac.mm
+@@ -740,7 +740,7 @@ class AppControllerNativeThemeObserver : public ui::NativeThemeObserver {
+ 
+ + (AppController*)sharedController {
+   static AppController* sharedController = [] {
+-    AppController* sharedController = [[AppController alloc] init];
++    AppController* sharedController = [[BraveAppController alloc] init];
+     NSApp.delegate = sharedController;
+     return sharedController;
+   }();
+@@ -837,6 +837,22 @@ class AppControllerNativeThemeObserver : public ui::NativeThemeObserver {
+ 
+   // Initialize the Profile menu.
+   [self initProfileMenu];
++
++  // Work around a bug in macOS 14. The application name shown in the menu bar
++  // should be the CFBundleName, but a bug in the menu rewrite causes the
++  // CFBundleDisplayName to be swapped in. What's happening here is that the
++  // NSMenuBarDisplayManager registers for a notification that the app name
++  // changed, and then, when the notification comes in, it calls a Process
++  // Manager API that returns the CFBundleDisplayName which is not appropriate
++  // for this use. Work around this by unregistering the NSMenuBarDisplayManager
++  // for the notification. See https://crbug.com/1487224 and FB13192263.
++  if (id sharedMenuBarDisplayManager = [NSClassFromString(
++          @"NSMenuBarDisplayManager") performSelector:@selector(shared)]) {
++    [NSWorkspace.sharedWorkspace.notificationCenter
++        removeObserver:sharedMenuBarDisplayManager
++                  name:@"NSWorkspaceApplicationNameDidChangeNotification"
++                object:nil];
++  }
+ }
+ 
+ - (void)unregisterEventHandlers {
+@@ -1335,7 +1351,7 @@ class AppControllerNativeThemeObserver : public ui::NativeThemeObserver {
+   }
+ 
+   auto it = _profileBookmarkMenuBridgeMap.find(profilePath);
+-  if (it != _profileBookmarkMenuBridgeMap.end() &&
++  if (it != _profileBookmarkMenuBridgeMap.end() && !isOffTheRecord &&
+       (!base::FeatureList::IsEnabled(features::kDestroyProfileOnBrowserClose) ||
+        (it->second->GetProfile() && !isOffTheRecord))) {
+     // Clean up the dangling Profile* in |_profileBookmarkMenuBridgeMap|.

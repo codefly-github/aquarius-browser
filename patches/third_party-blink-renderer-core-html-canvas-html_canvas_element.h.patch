@@ -1,0 +1,12 @@
+diff --git a/third_party/blink/renderer/core/html/canvas/html_canvas_element.h b/third_party/blink/renderer/core/html/canvas/html_canvas_element.h
+index d4efe68001a25d471fabd1233862a3077b129e04..9e21f98fbf872a5517e58385d6d0d95b240cade5 100644
+--- a/third_party/blink/renderer/core/html/canvas/html_canvas_element.h
++++ b/third_party/blink/renderer/core/html/canvas/html_canvas_element.h
+@@ -317,6 +317,7 @@ class CORE_EXPORT HTMLCanvasElement final
+ 
+   bool ShouldDisableAccelerationBecauseOfReadback() const;
+ 
++  BRAVE_HTML_CANVAS_ELEMENT_H_
+  protected:
+   void DidMoveToNewDocument(Document& old_document) override;
+   void DidRecalcStyle(const StyleRecalcChange change) override;

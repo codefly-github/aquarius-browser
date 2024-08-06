@@ -1,0 +1,24 @@
+diff --git a/chrome/browser/ui/BUILD.gn b/chrome/browser/ui/BUILD.gn
+index 49e6bdcbd55a6a2cd65ede185e57d8c1585016fd..ac646ca2bea2715a435d87ce89d9a6b32b95fde3 100644
+--- a/chrome/browser/ui/BUILD.gn
++++ b/chrome/browser/ui/BUILD.gn
+@@ -773,6 +773,7 @@ static_library("ui") {
+     # TODO(crbug.com/344921703): Remove circular dependencies.
+     "//chrome/browser/sync",
+   ]
++  public_deps += [ "//brave/browser/ui" ] allow_circular_includes_from += [ "//brave/browser/ui" ]
+ 
+   if (enable_vr && is_win) {
+     deps += [ "//chrome/browser/vr:vr_base" ]
+@@ -4808,7 +4809,10 @@ static_library("ui") {
+       ]
+       deps += [ "//chrome/updater/app/server/win:updater_legacy_idl" ]
+     } else {
+-      sources += [ "webui/help/version_updater_basic.cc" ]
++      if (!is_official_build) {
++        # In official build, //brave/browser/ui handles.
++        sources += [ "webui/help/version_updater_basic.cc" ]
++      }
+     }
+   } else {  # 'OS!="win"
+     if (toolkit_views) {

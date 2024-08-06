@@ -1,0 +1,12 @@
+diff --git a/chrome/browser/about_flags.cc b/chrome/browser/about_flags.cc
+index ff1ed1a98cbfe8e6c24d64f308dd119c635d00d5..4b1050c170c262cd2819aeaadfc44166a78edff4 100644
+--- a/chrome/browser/about_flags.cc
++++ b/chrome/browser/about_flags.cc
+@@ -4113,6 +4113,7 @@ const FeatureEntry::FeatureVariation kAutofillUpstreamUpdatedUiOptions[] = {
+ //
+ // When adding a new choice, add it to the end of the list.
+ const FeatureEntry kFeatureEntries[] = {
++    BRAVE_ABOUT_FLAGS_FEATURE_ENTRIES
+ // Include generated flags for flag unexpiry; see //docs/flag_expiry.md and
+ // //tools/flags/generate_unexpire_flags.py.
+ #include "build/chromeos_buildflags.h"

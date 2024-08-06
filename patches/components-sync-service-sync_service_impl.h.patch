@@ -1,0 +1,12 @@
+diff --git a/components/sync/service/sync_service_impl.h b/components/sync/service/sync_service_impl.h
+index ed1a833f5eea03eeba45252ce9e513a2b5d43258..d616eea5c18ac8e0f328ef6f2810891bb09da9b1 100644
+--- a/components/sync/service/sync_service_impl.h
++++ b/components/sync/service/sync_service_impl.h
+@@ -263,6 +263,7 @@ class SyncServiceImpl : public SyncService,
+   void ReportDataTypeErrorForTest(ModelType type);
+ 
+  private:
++  BRAVE_SYNC_SERVICE_IMPL_H_
+   enum UnrecoverableErrorReason {
+     ERROR_REASON_ENGINE_INIT_FAILURE,
+     ERROR_REASON_ACTIONABLE_ERROR,

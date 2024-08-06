@@ -1,0 +1,20 @@
+diff --git a/components/content_settings/browser/page_specific_content_settings.cc b/components/content_settings/browser/page_specific_content_settings.cc
+index f5ab165bb68eb29fb10763b3ec688794e7d41be0..4be394f5a2999a9d14fed94547e246c59563f07e 100644
+--- a/components/content_settings/browser/page_specific_content_settings.cc
++++ b/components/content_settings/browser/page_specific_content_settings.cc
+@@ -821,6 +821,7 @@ bool PageSpecificContentSettings::IsContentBlocked(
+       content_type == ContentSettingsType::ADS ||
+       content_type == ContentSettingsType::SOUND ||
+       content_type == ContentSettingsType::CLIPBOARD_READ_WRITE ||
++      content_type == ContentSettingsType::AUTOPLAY ||
+       content_type == ContentSettingsType::SENSORS ||
+       content_type == ContentSettingsType::GEOLOCATION ||
+       content_type == ContentSettingsType::NOTIFICATIONS) {
+@@ -847,6 +848,7 @@ bool PageSpecificContentSettings::IsContentAllowed(
+       content_type != ContentSettingsType::MEDIASTREAM_CAMERA &&
+       content_type != ContentSettingsType::MIDI_SYSEX &&
+       content_type != ContentSettingsType::CLIPBOARD_READ_WRITE &&
++      content_type != ContentSettingsType::AUTOPLAY &&
+       content_type != ContentSettingsType::SENSORS &&
+       content_type != ContentSettingsType::GEOLOCATION &&
+       content_type != ContentSettingsType::NOTIFICATIONS) {

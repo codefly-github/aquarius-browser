@@ -1,0 +1,11 @@
+diff --git a/build/android/gyp/lint.py b/build/android/gyp/lint.py
+index 0ac068ae4850743cfc06111bd655aa68c5aa8e59..008d8ea64fcc2046c4fd2b7ab0e6003f7dc765cf 100755
+--- a/build/android/gyp/lint.py
++++ b/build/android/gyp/lint.py
+@@ -518,5 +518,6 @@ def main():
+     action_helpers.write_depfile(args.depfile, args.stamp, depfile_deps)
+ 
+ 
++from brave_chromium_utils import inline_chromium_src_override; inline_chromium_src_override(globals(), locals())
+ if __name__ == '__main__':
+   sys.exit(main())

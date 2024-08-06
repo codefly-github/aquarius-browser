@@ -1,0 +1,12 @@
+diff --git a/components/content_settings/core/browser/content_settings_utils.cc b/components/content_settings/core/browser/content_settings_utils.cc
+index e34482e794944a70326a0cf768117b68f0030387..4df7ed6b7b5c829bd2ed1848901817f59a2c2d59 100644
+--- a/components/content_settings/core/browser/content_settings_utils.cc
++++ b/components/content_settings/core/browser/content_settings_utils.cc
+@@ -167,6 +167,7 @@ bool CanTrackLastVisit(ContentSettingsType type) {
+   if (type == ContentSettingsType::PROTOCOL_HANDLERS) {
+     return false;
+   }
++  BRAVE_CAN_TRACK_LAST_VISIT
+ 
+   // Chooser based content settings will not be tracked by default.
+   // Only allowlisted ones should be tracked.
